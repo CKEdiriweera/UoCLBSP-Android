@@ -19,5 +19,6 @@
     <dimen name="search_filter_margin_start">12dp</dimen>
 
     <dimen name="nav_profile_image">56dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 
 </resources>
