@@ -121,7 +121,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         TextView profileName = (TextView) drawerHeader.findViewById(R.id.profile_name);
         de.hdodenhof.circleimageview.CircleImageView imageView = (de.hdodenhof.circleimageview.CircleImageView) drawerHeader.findViewById(R.id.profile_image);
-//        TextView profileImage = (TextView) drawerHeader.findViewById(R.id.profile_image);
         TextView profileEmail = (TextView) drawerHeader.findViewById(R.id.profile_email);
 
         Intent intent = getIntent();
@@ -146,14 +145,31 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
                         // set item as selected to persist highlight
-                        menuItem.setChecked(true);
+//                        menuItem.setChecked(true);
                         // close drawer when item is tapped
                         mDrawerLayout.closeDrawers();
 
                         // Add code here to update the UI based on the item selected
                         // For example, swap UI fragments here
+                        int id = menuItem.getItemId();
 
-                        return true;
+                        switch (id){
+                            case R.id.nav_directions:
+                                Intent d= new Intent(MapsActivity.this,Directions.class);
+                                startActivity(d);
+                                break;
+                            case R.id.nav_nearby:
+                                Intent n= new Intent(MapsActivity.this,Nearby.class);
+                                startActivity(n);
+                                break;
+                            case R.id.nav_signout:
+
+                                break;
+
+                        }
+
+
+                            return true;
                     }
                 });
 
@@ -440,7 +456,7 @@ class GetSearchResults extends AsyncTask {
     protected Object doInBackground(Object[] params) {
 
         try {
-            InetAddress address = InetAddress.getByName("ec2-52-72-156-17.compute-1.amazonaws.com");
+            InetAddress address = InetAddress.getByName("ec2-18-216-184-231.us-east-2.compute.amazonaws.com");
             Socket s1 = null;
             String line = null;
             BufferedReader br = null;
