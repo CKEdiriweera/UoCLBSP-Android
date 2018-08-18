@@ -64,7 +64,8 @@
         </activity>
         <activity android:name=".GSignUp" />
         <activity android:name=".Directions" />
-        <activity android:name=".Nearby"></activity>
+        <activity android:name=".Nearby" />
+        <activity android:name=".SearchDirections"></activity>
     </application>
 
 </manifest>

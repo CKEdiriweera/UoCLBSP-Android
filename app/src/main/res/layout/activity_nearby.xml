@@ -1,51 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Test">
+    tools:context=".Nearby">
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:map="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/map"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="com.group06.applications.uoclbsp_source.MapsActivity"
-        />
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/map2"
+    android:name="com.google.android.gms.maps.SupportMapFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.group06.applications.uoclbsp_source.Nearby"
+    />
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
-        app:navigationIcon="?attr/homeAsUpIndicator" />
+        app:navigationIcon="?attr/homeAsUpIndicator"/>
 
-    <com.miguelcatalan.materialsearchview.MaterialSearchView
-        android:id="@+id/search_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:searchBackground="@color/colorPrimary"
-        app:searchSuggestionBackground="@color/colorPrimary"
-        app:searchCloseIcon="@drawable/ic_action_navigation_close_inverted"
-        app:searchBackIcon="@drawable/ic_action_navigation_arrow_back_inverted"
-        app:searchSuggestionIcon="@drawable/ic_suggestion"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#FFFFFF"
 
-        />
+        <Button
+            android:id="@+id/btnCanteens"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/toolbar"
+            android:onClick="getCanteens"
+            android:text="  Canteens   " />
 
-    <ListView
-        android:id="@+id/lstView"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:layout_below="@+id/toolbar"
+        <Button
+            android:id="@+id/btnWashrooms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btnCanteens"
+            android:onClick="getWashrooms"
+            android:text="Washrooms" />
 
-        android:divider="#806326"
-        android:dividerHeight="1dp"
-        android:background="#FFFFFF"
-        />
+        <Button
+            android:id="@+id/btnLibraries"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btnWashrooms"
+            android:onClick="getLibraries"
+            android:text="   Libraries   " />
 
-</android.support.constraint.ConstraintLayout>
+
+
+</RelativeLayout>
