@@ -5,7 +5,7 @@
     <string name="title_activity_map">UoC Maps</string>
     <string name="directions">Get Directions</string>
     <string name="gallery">Gallery</string>
-    <string name="near_me">Near me</string>
+    <string name="near_me">Nearby Search</string>
     <string name="signout">Sign-out</string>
     <string name="home">Home</string>
     <string name="title_activity_directions">Directions</string>

@@ -163,7 +163,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                                 startActivity(n);
                                 break;
                             case R.id.nav_signout:
-
+                                Intent s= new Intent(MapsActivity.this,SearchDirections.class);
+                                startActivity(s);
                                 break;
 
                         }
