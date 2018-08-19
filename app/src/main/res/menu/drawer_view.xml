@@ -7,6 +7,10 @@
             android:icon="@drawable/ic_menu_directions"
             android:title="@string/directions" />
         <item
+            android:id="@+id/nav_search_directions"
+            android:icon="@drawable/ic_menu_directions"
+            android:title="Get Directions by search" />
+        <item
             android:id="@+id/nav_nearby"
             android:icon="@drawable/ic_menu_near_me"
             android:title="@string/near_me" />

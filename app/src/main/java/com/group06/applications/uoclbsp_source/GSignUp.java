@@ -2,6 +2,8 @@ package com.group06.applications.uoclbsp_source;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Parcelable;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,7 +15,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+
+import java.io.Serializable;
 
 public class GSignUp extends AppCompatActivity implements View.OnClickListener {
     GoogleSignInClient mGoogleSignInClient;
@@ -74,6 +79,7 @@ public class GSignUp extends AppCompatActivity implements View.OnClickListener {
     }
 
 
+
     @Override
     public void onClick(View view) {
 //        Intent intent = new Intent(this,MapsActivity.class );
@@ -114,20 +120,6 @@ public class GSignUp extends AppCompatActivity implements View.OnClickListener {
 
             // Signed in successfully, show authenticated UI.
             updateUI(account);
-//            GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
-//        if (acct != null) {
-//            String personName = acct.getDisplayName();
-//            String personGivenName = acct.getGivenName();
-//            String personFamilyName = acct.getFamilyName();
-//            String personEmail = acct.getEmail();
-//            String personId = acct.getId();
-//            Uri personPhoto = acct.getPhotoUrl();
-//
-//            System.out.println(personName);
-//            System.out.println(personEmail);
-//
-//        }
-
 
         } catch (ApiException e) {
             e.printStackTrace();
@@ -138,20 +130,4 @@ public class GSignUp extends AppCompatActivity implements View.OnClickListener {
             System.out.println("nooooo");
         }
     }
-
-//    GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(getActivity());
-//    if (acct != null) {
-//        String personName = acct.getDisplayName();
-//        String personGivenName = acct.getGivenName();
-//        String personFamilyName = acct.getFamilyName();
-//        String personEmail = acct.getEmail();
-//        String personId = acct.getId();
-//        Uri personPhoto = acct.getPhotoUrl();
-//    }
-
-//    public void setProfileInfo(){
-//        TextView textView= findViewById(R.id.profile_name);
-//        textView.setText(personName);
-//    }
-
 }

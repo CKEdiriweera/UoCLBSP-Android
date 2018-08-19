@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -30,8 +31,15 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -44,7 +52,9 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.maps.android.PolyUtil;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.squareup.picasso.Picasso;
@@ -95,6 +105,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private int waitingTime = 200;
     private CountDownTimer cntr;
     private DrawerLayout mDrawerLayout;
+    GoogleSignInClient mGoogleSignInClient;
 
 
     @Override
@@ -158,13 +169,18 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                                 Intent d= new Intent(MapsActivity.this,Directions.class);
                                 startActivity(d);
                                 break;
+
+                            case R.id.nav_search_directions:
+                                Intent s= new Intent(MapsActivity.this,SearchDirections.class);
+                                startActivity(s);
+                                break;
                             case R.id.nav_nearby:
                                 Intent n= new Intent(MapsActivity.this,Nearby.class);
                                 startActivity(n);
                                 break;
                             case R.id.nav_signout:
-                                Intent s= new Intent(MapsActivity.this,SearchDirections.class);
-                                startActivity(s);
+                                signOut();
+
                                 break;
 
                         }
@@ -301,6 +317,28 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
 
+    }
+
+    @Override
+    protected void onStart() {
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+        super.onStart();
+    }
+
+    private void signOut(){
+        mGoogleSignInClient.signOut()
+                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        // ...
+                        Toast.makeText(getApplicationContext(),"Logged Out", Toast.LENGTH_SHORT).show();
+                        Intent i=new Intent(getApplicationContext(),GSignUp.class);
+                        startActivity(i);
+                    }
+                });
     }
 
     @Override
