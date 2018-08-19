@@ -14,7 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context="com.group06.applications.uoclbsp_source.MapsActivity"
-        />
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
 
     <Button
         android:id="@+id/get_directions_button"
@@ -29,6 +30,7 @@
         android:layout_marginTop="8dp"
         android:onClick="getDirections"
         android:text="Get Directions"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
@@ -42,6 +44,23 @@
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
         app:navigationIcon="?attr/homeAsUpIndicator" />
+
+    <ImageButton
+        android:id="@+id/refresh_button"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:onClick="refresh"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.111"
+        app:srcCompat="@drawable/ic_refresh" />
 
 
 </android.support.constraint.ConstraintLayout>

@@ -21,6 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -55,6 +56,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import static com.group06.applications.uoclbsp_source.R.id.refresh_button;
+
 public class Directions extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnCameraIdleListener {
 
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
@@ -78,6 +81,7 @@ public class Directions extends AppCompatActivity implements OnMapReadyCallback,
     private boolean mLocationPermissionGranted;
     private Location mLastKnownLocation;
     public Button getDirectionsButton;
+    public ImageButton refreshButton;
     ArrayList<Polyline> lanePolylines = new ArrayList<Polyline>();
     private int waitingTime = 200;
     private CountDownTimer cntr;
@@ -118,6 +122,7 @@ public class Directions extends AppCompatActivity implements OnMapReadyCallback,
         mapView = mapFragment.getView();
 
 
+        refreshButton = (ImageButton) findViewById(R.id.refresh_button);
         getDirectionsButton = (Button) findViewById(R.id.get_directions_button);
     }
 
@@ -141,6 +146,10 @@ public class Directions extends AppCompatActivity implements OnMapReadyCallback,
             return;
         }
         mMap.setMyLocationEnabled(true);
+
+        getDirectionsButton.setVisibility(View.INVISIBLE);
+        refreshButton.setVisibility(View.INVISIBLE);
+
         mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
             @Override
             public void onMapLongClick(LatLng latLng) {
@@ -150,6 +159,7 @@ public class Directions extends AppCompatActivity implements OnMapReadyCallback,
                     markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
                     Marker marker1 = mMap.addMarker(markerOptions);
                     ltlng1 = marker1.getPosition();
+                    refreshButton.setVisibility(View.VISIBLE);
                     count++;
                 }else if(count == 1) {
                     MarkerOptions markerOptions = new MarkerOptions();
@@ -157,15 +167,17 @@ public class Directions extends AppCompatActivity implements OnMapReadyCallback,
                     markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
                     Marker marker2 = mMap.addMarker(markerOptions);
                     ltlng2 = marker2.getPosition();
+                    getDirectionsButton.setVisibility(View.VISIBLE);
+                    refreshButton.setVisibility(View.VISIBLE);
                     count++;
                 }else if(count == 2){
-                    getDirectionsButton.setVisibility(View.VISIBLE);
                     mMap.clear();
                     MarkerOptions markerOptions = new MarkerOptions();
                     markerOptions.position(latLng);
                     markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
                     Marker marker1 = mMap.addMarker(markerOptions);
                     ltlng1 = marker1.getPosition();
+                    refreshButton.setVisibility(View.VISIBLE);
                     count = 1;
                 }
             }
@@ -223,6 +235,13 @@ public class Directions extends AppCompatActivity implements OnMapReadyCallback,
             }
             //mPolyline.setWidth(this.getLineWidth());
         }
+    }
+
+    public void refresh(View view) {
+        getDirectionsButton.setVisibility(View.INVISIBLE);
+        refreshButton.setVisibility(View.INVISIBLE);
+        mMap.clear();
+        count = 0;
     }
 }
 
