@@ -21,6 +21,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -214,6 +215,9 @@ public class SearchDirections extends AppCompatActivity implements OnMapReadyCal
                     markerstart.showInfoWindow();
                     count++;
                     getDirectionsButton.setVisibility(View.INVISIBLE);
+
+                    Toast.makeText(SearchDirections.this,"Please Search & Select the End Point!", Toast.LENGTH_LONG).show();
+
                 }else if(count == 1){
                     markerend = mMap.addMarker(new MarkerOptions()
                             .position(new LatLng(loc[0], loc[1]))
@@ -222,6 +226,9 @@ public class SearchDirections extends AppCompatActivity implements OnMapReadyCal
                     markerend.showInfoWindow();
                     count++;
                     getDirectionsButton.setVisibility(View.VISIBLE);
+
+                    Toast.makeText(SearchDirections.this,"Please Click GET DIRECTION!", Toast.LENGTH_LONG).show();
+
                 }else if(count == 2){
                     if (mPolyline!=null){
                         mPolyline.remove();
@@ -241,6 +248,9 @@ public class SearchDirections extends AppCompatActivity implements OnMapReadyCal
                     markerstart.showInfoWindow();
                     count--;
                     getDirectionsButton.setVisibility(View.INVISIBLE);
+
+                    Toast.makeText(SearchDirections.this,"Please Search & Select the End Point!", Toast.LENGTH_LONG).show();
+
                 }
 
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(loc[0], loc[1]),16));
@@ -250,6 +260,8 @@ public class SearchDirections extends AppCompatActivity implements OnMapReadyCal
 
             }
         });
+
+        Toast.makeText(SearchDirections.this,"Please Search & Select Start Point!", Toast.LENGTH_LONG).show();
 
 
 
@@ -378,6 +390,8 @@ public class SearchDirections extends AppCompatActivity implements OnMapReadyCal
         System.out.println(destinationLatLng.toString());
         Object[] objects = new Object[]{sourceLatLng, sourcePoly, destinationLatLng, destinationPoly};
         new GetSearchResultsSD().execute(new Object[]{objects, SearchDirections.this, 3});
+
+        Toast.makeText(SearchDirections.this,"Click Refresh to Clear Map!", Toast.LENGTH_LONG).show();
     }
 
     public float getLineWidth() {
@@ -414,6 +428,9 @@ public class SearchDirections extends AppCompatActivity implements OnMapReadyCal
         }
         count = 0;
         getDirectionsButton.setVisibility(View.INVISIBLE);
+
+        Toast.makeText(SearchDirections.this,"Refreshed Successfully!", Toast.LENGTH_LONG).show();
+        Toast.makeText(SearchDirections.this,"Search & Select the Start Point!", Toast.LENGTH_LONG).show();
     }
 }
 

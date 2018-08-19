@@ -25,6 +25,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -124,6 +125,8 @@ public class Directions extends AppCompatActivity implements OnMapReadyCallback,
 
         refreshButton = (ImageButton) findViewById(R.id.refresh_button);
         getDirectionsButton = (Button) findViewById(R.id.get_directions_button);
+
+        Toast.makeText(Directions.this,"Please Hold Click the Start Point!", Toast.LENGTH_LONG).show();
     }
 
 
@@ -161,6 +164,9 @@ public class Directions extends AppCompatActivity implements OnMapReadyCallback,
                     ltlng1 = marker1.getPosition();
                     refreshButton.setVisibility(View.VISIBLE);
                     count++;
+
+                    Toast.makeText(Directions.this,"Please Hold Click the End Point!", Toast.LENGTH_LONG).show();
+
                 }else if(count == 1) {
                     MarkerOptions markerOptions = new MarkerOptions();
                     markerOptions.position(latLng);
@@ -170,6 +176,9 @@ public class Directions extends AppCompatActivity implements OnMapReadyCallback,
                     getDirectionsButton.setVisibility(View.VISIBLE);
                     refreshButton.setVisibility(View.VISIBLE);
                     count++;
+
+                    Toast.makeText(Directions.this,"Please Click GET DIRECTION!", Toast.LENGTH_LONG).show();
+
                 }else if(count == 2){
                     mMap.clear();
                     MarkerOptions markerOptions = new MarkerOptions();
@@ -179,6 +188,8 @@ public class Directions extends AppCompatActivity implements OnMapReadyCallback,
                     ltlng1 = marker1.getPosition();
                     refreshButton.setVisibility(View.VISIBLE);
                     count = 1;
+
+                    Toast.makeText(Directions.this,"Please Hold Click the End Point!", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -211,6 +222,9 @@ public class Directions extends AppCompatActivity implements OnMapReadyCallback,
         System.out.println(destinationLatLng.toString());
         Object[] objects = new Object[]{sourceLatLng, sourcePoly, destinationLatLng, destinationPoly};
         new GetSearchResultsD().execute(new Object[]{objects, Directions.this, 3});
+
+
+        Toast.makeText(Directions.this,"Click Refresh to Clear Map!", Toast.LENGTH_LONG).show();
     }
 
 
@@ -242,6 +256,9 @@ public class Directions extends AppCompatActivity implements OnMapReadyCallback,
         refreshButton.setVisibility(View.INVISIBLE);
         mMap.clear();
         count = 0;
+
+        Toast.makeText(Directions.this,"Refreshed Successfully!", Toast.LENGTH_LONG).show();
+        Toast.makeText(Directions.this,"Hold Click the Start Point!", Toast.LENGTH_LONG).show();
     }
 }
 
