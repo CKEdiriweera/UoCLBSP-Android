@@ -5,11 +5,11 @@
         <item
             android:id="@+id/nav_directions"
             android:icon="@drawable/ic_menu_directions"
-            android:title="@string/directions" />
+            android:title="Directions By Markers" />
         <item
             android:id="@+id/nav_search_directions"
             android:icon="@drawable/ic_menu_directions"
-            android:title="Get Directions by search" />
+            android:title="Get Directions" />
         <item
             android:id="@+id/nav_nearby"
             android:icon="@drawable/ic_menu_near_me"
