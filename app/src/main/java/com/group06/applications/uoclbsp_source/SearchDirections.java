@@ -20,7 +20,6 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -166,7 +165,7 @@ public class SearchDirections extends AppCompatActivity implements OnMapReadyCal
                             }
 
                             public void onFinish() {
-                                new GetSearchResultsSD().execute(new Object[]{clue, SearchDirections.this, 1});
+                                new GetSearchDirectionsResults().execute(new Object[]{clue, SearchDirections.this, 1});
                                 lstView = (ListView) findViewById(R.id.lstView);
                                 lstView.setVisibility(View.VISIBLE);
                             }
@@ -300,7 +299,7 @@ public class SearchDirections extends AppCompatActivity implements OnMapReadyCal
 
         //set move camera to current location
         setToCurrentLocation();
-        new GetSearchResultsSD().execute(new Object[]{"", SearchDirections.this, 2});
+        new GetSearchDirectionsResults().execute(new Object[]{"", SearchDirections.this, 2});
         mMap.setOnCameraIdleListener(this);
         mMap.setPadding(0,150,0,0);
     }
@@ -392,7 +391,7 @@ public class SearchDirections extends AppCompatActivity implements OnMapReadyCal
         System.out.println(sourceLatLng.toString());
         System.out.println(destinationLatLng.toString());
         Object[] objects = new Object[]{sourceLatLng, sourcePoly, destinationLatLng, destinationPoly};
-        new GetSearchResultsSD().execute(new Object[]{objects, SearchDirections.this, 3});
+        new GetSearchDirectionsResults().execute(new Object[]{objects, SearchDirections.this, 3});
 
         Toast.makeText(SearchDirections.this,"Click Refresh to Clear Map!", Toast.LENGTH_LONG).show();
     }
@@ -438,7 +437,7 @@ public class SearchDirections extends AppCompatActivity implements OnMapReadyCal
     }
 }
 
-class GetSearchResultsSD extends AsyncTask {
+class GetSearchDirectionsResults extends AsyncTask {
 
     @Override
     protected Object doInBackground(Object[] params) {
