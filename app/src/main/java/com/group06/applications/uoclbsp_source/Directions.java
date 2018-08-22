@@ -1,29 +1,20 @@
 package com.group06.applications.uoclbsp_source;
 
 import android.Manifest;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,10 +31,8 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.maps.android.PolyUtil;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -56,8 +45,6 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import static com.group06.applications.uoclbsp_source.R.id.refresh_button;
 
 public class Directions extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnCameraIdleListener {
 
@@ -139,7 +126,7 @@ public class Directions extends AppCompatActivity implements OnMapReadyCallback,
 
         //Check permission and get current location
 
-        new GetSearchResultsD().execute(new Object[]{"", Directions.this, 2});
+        new GetDirectionResults().execute(new Object[]{"", Directions.this, 2});
         mMap.setOnCameraIdleListener(this);
         mMap.setPadding(0,150,0,0);
 
@@ -221,7 +208,7 @@ public class Directions extends AppCompatActivity implements OnMapReadyCallback,
         System.out.println(sourceLatLng.toString());
         System.out.println(destinationLatLng.toString());
         Object[] objects = new Object[]{sourceLatLng, sourcePoly, destinationLatLng, destinationPoly};
-        new GetSearchResultsD().execute(new Object[]{objects, Directions.this, 3});
+        new GetDirectionResults().execute(new Object[]{objects, Directions.this, 3});
 
 
         Toast.makeText(Directions.this,"Click Refresh to Clear Map!", Toast.LENGTH_LONG).show();
@@ -264,7 +251,7 @@ public class Directions extends AppCompatActivity implements OnMapReadyCallback,
 
 
 
-class GetSearchResultsD extends AsyncTask {
+class GetDirectionResults extends AsyncTask {
 
     @Override
     protected Object doInBackground(Object[] params) {
