@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -73,6 +74,7 @@ public class Nearby extends AppCompatActivity implements OnMapReadyCallback, Goo
     ArrayList<Integer> myIndex = null;
     public Button getDirectionsButton;
     boolean done = false;
+    int num = 2;
 
 
     @Override
@@ -274,6 +276,7 @@ public class Nearby extends AppCompatActivity implements OnMapReadyCallback, Goo
         System.out.println(sourceLatLng.toString());
         Object[] objects = new Object[]{source_name,sourceLatLng,room_type};
         new GetNearbySearchResults().execute(new Object[]{objects,Nearby.this,4});
+
     }
 
 
@@ -283,13 +286,31 @@ public class Nearby extends AppCompatActivity implements OnMapReadyCallback, Goo
         desLatLng = marker.getPosition();
         System.out.println(desLatLng);
         getDirectionsButton.setVisibility(View.VISIBLE);
+        Toast.makeText(Nearby.this,"Click GET DIRECTIONS", Toast.LENGTH_LONG).show();
         return false;
     }
+
+
+    public void notification(int num1){
+        if(num1 == 0){
+            Toast.makeText(Nearby.this,"No nearby locations were found!", Toast.LENGTH_LONG).show();
+            num = 2;
+        }
+
+        else if(num1 == 1){
+            Toast.makeText(Nearby.this,"Click a marker to get details of a location", Toast.LENGTH_LONG).show();
+            num = 2;
+        }
+
+    }
+
 }
 
 class GetNearbySearchResults extends AsyncTask {
 
     JSONObject jsonObject;
+
+
 
     @Override
     protected Object doInBackground(Object[] params) {
@@ -433,14 +454,25 @@ class GetNearbySearchResults extends AsyncTask {
                         String source_name = jsonObject.get("name").toString();
                         LatLng sourceLatLng = new LatLng(jsonObject.getDouble("lat"), jsonObject.getDouble("lng"));
                         String description = jsonObject.get("description").toString();
+                        double lat = sourceLatLng.latitude;
+                        double lang = sourceLatLng.longitude;
 
-                        nearby.mMap.addMarker(new MarkerOptions().position(sourceLatLng)
-                                .title(source_name).snippet(description));
+                        if(lat == 0 & lang == 0){
+                            System.out.println("No locations found");
+                            nearby.num = 0;
+                        }
 
-                        nearby.mMap.moveCamera(CameraUpdateFactory.newLatLng(sourceLatLng));
 
+                        else{
+                            nearby.mMap.addMarker(new MarkerOptions().position(sourceLatLng)
+                                    .title(source_name).snippet(description));
 
+                            nearby.mMap.moveCamera(CameraUpdateFactory.newLatLng(sourceLatLng));
+                            nearby.num = 1;
+
+                        }
                     }
+                    nearby.notification(nearby.num);
                 }
             }
 

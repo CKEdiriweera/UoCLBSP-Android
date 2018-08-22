@@ -223,7 +223,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public void onSearchViewShown() {
 
-                Toast.makeText(MapsActivity.this,"Please Tpye Name of Place & Select it!", Toast.LENGTH_LONG).show();
+                Toast.makeText(MapsActivity.this,"Please type & select the searched item!", Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -474,7 +474,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         Object[] objects = new Object[]{sourceLatLng, sourcePoly, destinationLatLng, destinationPoly};
         new GetSearchResults().execute(new Object[]{objects, MapsActivity.this, 3});
 
-        Toast.makeText(MapsActivity.this,"Please Click Refresh Icon for Refresh Click Search Bar for Search Another Place!!", Toast.LENGTH_LONG).show();
+        Toast.makeText(MapsActivity.this,"Please Click Refresh Icon to Refresh Click Search Bar to Search!!", Toast.LENGTH_LONG).show();
     }
 
     public float getLineWidth() {
