@@ -59,13 +59,11 @@ public class SearchDirections extends AppCompatActivity implements OnMapReadyCal
     GoogleMap mMap;
     MaterialSearchView searchView;
     ListView lstView;
-    TextView textView;
     ArrayList<JSONObject> lstSource = new ArrayList<JSONObject>();
     ArrayList<JSONObject> lstFound;
     List<double[]> lstFoundLocation;
     ArrayList<ArrayList<LatLng>> myPolygons = null;
     ArrayList<Integer> myIndex = null;
-    Marker marker;
     Marker markerstart;
     Marker markerend;
     LatLng currLatLng;
@@ -118,7 +116,9 @@ public class SearchDirections extends AppCompatActivity implements OnMapReadyCal
         getDirectionsButton = (Button) findViewById(R.id.get_directions_button);
         refreshButton = (ImageButton) findViewById(R.id.refresh_button);
 
+
         getDirectionsButton.setVisibility(View.INVISIBLE);
+        refreshButton.setVisibility(View.INVISIBLE);
 
 
         SearchArrayAdapter adapter = new SearchArrayAdapter(this, R.layout.uocmap_list_item, lstSource);
@@ -215,6 +215,7 @@ public class SearchDirections extends AppCompatActivity implements OnMapReadyCal
                     markerstart.showInfoWindow();
                     count++;
                     getDirectionsButton.setVisibility(View.INVISIBLE);
+                    refreshButton.setVisibility(View.VISIBLE);
 
                     Toast.makeText(SearchDirections.this,"Please Search & Select the End Point!", Toast.LENGTH_LONG).show();
 
@@ -226,6 +227,7 @@ public class SearchDirections extends AppCompatActivity implements OnMapReadyCal
                     markerend.showInfoWindow();
                     count++;
                     getDirectionsButton.setVisibility(View.VISIBLE);
+                    refreshButton.setVisibility(View.VISIBLE);
 
                     Toast.makeText(SearchDirections.this,"Please Click GET DIRECTION!", Toast.LENGTH_LONG).show();
 
@@ -248,6 +250,7 @@ public class SearchDirections extends AppCompatActivity implements OnMapReadyCal
                     markerstart.showInfoWindow();
                     count--;
                     getDirectionsButton.setVisibility(View.INVISIBLE);
+                    refreshButton.setVisibility(View.VISIBLE);
 
                     Toast.makeText(SearchDirections.this,"Please Search & Select the End Point!", Toast.LENGTH_LONG).show();
 
@@ -428,6 +431,7 @@ public class SearchDirections extends AppCompatActivity implements OnMapReadyCal
         }
         count = 0;
         getDirectionsButton.setVisibility(View.INVISIBLE);
+        refreshButton.setVisibility(View.INVISIBLE);
 
         Toast.makeText(SearchDirections.this,"Refreshed Successfully!", Toast.LENGTH_LONG).show();
         Toast.makeText(SearchDirections.this,"Search & Select the Start Point!", Toast.LENGTH_LONG).show();

@@ -27,6 +27,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -101,6 +102,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private boolean mLocationPermissionGranted;
     private Location mLastKnownLocation;
     public Button getDirectionsButton;
+    public ImageButton refreshButton;
     ArrayList<Polyline> lanePolylines = new ArrayList<Polyline>();
     private int waitingTime = 200;
     private CountDownTimer cntr;
@@ -206,7 +208,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         lstView = (ListView) findViewById(R.id.lstView);
         getDirectionsButton = (Button) findViewById(R.id.get_directions_button);
+        refreshButton = (ImageButton) findViewById(R.id.refresh_button);
+
         getDirectionsButton.setVisibility(View.INVISIBLE);
+        refreshButton.setVisibility(View.INVISIBLE);
 
 
         SearchArrayAdapter adapter = new SearchArrayAdapter(this, R.layout.uocmap_list_item, lstSource);
@@ -218,6 +223,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public void onSearchViewShown() {
 
+                Toast.makeText(MapsActivity.this,"Please Tpye Name of Place & Select it!", Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -227,6 +233,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 lstView = (ListView) findViewById(R.id.lstView);
                 SearchArrayAdapter adapter = new SearchArrayAdapter(MapsActivity.this, R.layout.uocmap_list_item, lstSource);
                 lstView.setAdapter(adapter);
+
 
             }
         });
@@ -307,15 +314,18 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(loc[0], loc[1]),16));
                 lstView = (ListView) findViewById(R.id.lstView);
+
                 lstView.setVisibility(View.INVISIBLE);
                 getDirectionsButton.setVisibility(View.VISIBLE);
+                refreshButton.setVisibility(View.VISIBLE);
 
+                Toast.makeText(MapsActivity.this,"Please Click GET DIRECTIONS!", Toast.LENGTH_LONG).show();
 
             }
         });
 
 
-
+        Toast.makeText(MapsActivity.this,"Please Search Point & Select!", Toast.LENGTH_LONG).show();
 
     }
 
@@ -463,6 +473,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         System.out.println(destinationLatLng.toString());
         Object[] objects = new Object[]{sourceLatLng, sourcePoly, destinationLatLng, destinationPoly};
         new GetSearchResults().execute(new Object[]{objects, MapsActivity.this, 3});
+
+        Toast.makeText(MapsActivity.this,"Please Click Refresh Icon for Refresh Click Search Bar for Search Another Place!!", Toast.LENGTH_LONG).show();
     }
 
     public float getLineWidth() {
@@ -487,6 +499,19 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
     }
 
+    public void refresh(View view) {
+        if (mPolyline!=null){
+            mPolyline.remove();
+        }
+        if(marker != null){
+            marker.remove();
+        }
+        getDirectionsButton.setVisibility(View.INVISIBLE);
+        refreshButton.setVisibility(View.INVISIBLE);
+
+        Toast.makeText(MapsActivity.this,"Refreshed Successfully!", Toast.LENGTH_LONG).show();
+        Toast.makeText(MapsActivity.this,"Please Click Search Bar for Search a Place!", Toast.LENGTH_LONG).show();
+    }
 }
 
 class GetSearchResults extends AsyncTask {
