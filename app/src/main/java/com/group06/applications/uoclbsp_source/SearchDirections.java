@@ -89,7 +89,7 @@ public class SearchDirections extends AppCompatActivity implements OnMapReadyCal
 
         Toolbar toolbar3 = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar3);
-        getSupportActionBar().setTitle("Directions By Search");
+        getSupportActionBar().setTitle("Get Directions");
         toolbar3.setTitleTextColor(Color.parseColor("#FFFFFF"));
 
 

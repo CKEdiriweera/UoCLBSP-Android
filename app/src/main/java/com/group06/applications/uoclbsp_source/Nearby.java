@@ -297,8 +297,8 @@ class GetNearbySearchResults extends AsyncTask {
         try {
             if ((int) params[2] == 4) {
 
-//                String link = "http://ec2-18-216-184-231.us-east-2.compute.amazonaws.com/UoCLBSP-WebServer/Nearby_search/get_nearby_places_android";
-                String link = "http://7bc940a2.ngrok.io/UoCLBSP-WebServer/Nearby_search/get_nearby_places_android";
+                String link = "http://ec2-18-216-184-231.us-east-2.compute.amazonaws.com/UoCLBSP-WebServer/Nearby_search/get_nearby_places_android";
+//                String link = "http://f8690899.ngrok.io/UoCLBSP-WebServer/Nearby_search/get_nearby_places_android";
                 JSONObject jsonObject = new JSONObject();
                 Object[] objects = (Object[]) params[0];
                 jsonObject.put("source_name", objects[0]);
