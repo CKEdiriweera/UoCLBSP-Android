@@ -291,8 +291,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     cntr.cancel();
                 }
                 String title = "";
+                String alt = "";
                 try {
                     title = lstFound.get(position).getString("name");
+                    alt = lstFound.get(position).getString("alt");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -309,7 +311,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 marker = mMap.addMarker(new MarkerOptions()
                         .position(new LatLng(loc[0], loc[1]))
-                        .title(title));
+                        .title(title)
+                        .snippet(alt));
                 marker.showInfoWindow();
 
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(loc[0], loc[1]),16));

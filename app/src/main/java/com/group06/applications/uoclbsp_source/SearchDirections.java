@@ -197,9 +197,11 @@ public class SearchDirections extends AppCompatActivity implements OnMapReadyCal
                 }
 
                 String title = "";
+                String alt = "";
 
                 try {
                     title = lstFound.get(position).getString("name");
+                    alt = lstFound.get(position).getString("alt");
                 }
                 catch (Exception e) {
                     e.printStackTrace();
@@ -214,7 +216,8 @@ public class SearchDirections extends AppCompatActivity implements OnMapReadyCal
                 if(count == 0) {
                     markerstart = mMap.addMarker(new MarkerOptions()
                             .position(new LatLng(loc[0], loc[1]))
-                            .title(title));
+                            .title(title)
+                            .snippet(alt));
 
                     markerstart.showInfoWindow();
                     count++;
@@ -227,7 +230,8 @@ public class SearchDirections extends AppCompatActivity implements OnMapReadyCal
                 else if(count == 1){
                     markerend = mMap.addMarker(new MarkerOptions()
                             .position(new LatLng(loc[0], loc[1]))
-                            .title(title));
+                            .title(title)
+                            .snippet(alt));
 
                     markerend.showInfoWindow();
                     count++;
@@ -250,7 +254,8 @@ public class SearchDirections extends AppCompatActivity implements OnMapReadyCal
 
                     markerstart = mMap.addMarker(new MarkerOptions()
                             .position(new LatLng(loc[0], loc[1]))
-                            .title(title));
+                            .title(title)
+                            .snippet(alt));
 
                     markerstart.showInfoWindow();
                     count--;
