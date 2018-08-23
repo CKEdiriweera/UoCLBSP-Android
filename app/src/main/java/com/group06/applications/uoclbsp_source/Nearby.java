@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -73,6 +74,7 @@ public class Nearby extends AppCompatActivity implements OnMapReadyCallback, Goo
     ArrayList<ArrayList<LatLng>> myPolygons = null;
     ArrayList<Integer> myIndex = null;
     public Button getDirectionsButton;
+    public ImageButton refreshButton;
     boolean done = false;
     int num = 2;
 
@@ -98,6 +100,8 @@ public class Nearby extends AppCompatActivity implements OnMapReadyCallback, Goo
 
         getDirectionsButton = (Button) findViewById(R.id.get_directions_button);
         getDirectionsButton.setVisibility(View.INVISIBLE);
+        refreshButton = (ImageButton) findViewById(R.id.refresh_button);
+        refreshButton.setVisibility(View.INVISIBLE);
 
 
 
@@ -286,6 +290,7 @@ public class Nearby extends AppCompatActivity implements OnMapReadyCallback, Goo
         desLatLng = marker.getPosition();
         System.out.println(desLatLng);
         getDirectionsButton.setVisibility(View.VISIBLE);
+        refreshButton.setVisibility(View.VISIBLE);
         Toast.makeText(Nearby.this,"Click GET DIRECTIONS", Toast.LENGTH_LONG).show();
         return false;
     }
@@ -304,6 +309,14 @@ public class Nearby extends AppCompatActivity implements OnMapReadyCallback, Goo
 
     }
 
+
+    public void refresh(View view) {
+        getDirectionsButton.setVisibility(View.INVISIBLE);
+        refreshButton.setVisibility(View.INVISIBLE);
+        mMap.clear();
+
+        Toast.makeText(Nearby.this, "Refreshed Successfully!", Toast.LENGTH_LONG).show();
+    }
 }
 
 class GetNearbySearchResults extends AsyncTask {
@@ -551,6 +564,7 @@ class GetNearbySearchResults extends AsyncTask {
                     nearby.mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), 50));
 
                     nearby.getDirectionsButton.setVisibility(View.INVISIBLE);
+                    nearby.refreshButton.setVisibility(View.VISIBLE);
 
                 }
                 

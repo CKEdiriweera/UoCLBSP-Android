@@ -26,7 +26,18 @@
         app:navigationIcon="?attr/homeAsUpIndicator"/>
 
 
-        <Button
+    <ImageButton
+        android:id="@+id/refresh_button"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="12dp"
+        android:layout_marginTop="63dp"
+        android:onClick="refresh"
+        app:srcCompat="@drawable/ic_refresh" />
+
+    <Button
             android:id="@+id/btnCanteens"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
